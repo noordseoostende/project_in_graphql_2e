@@ -1,5 +1,7 @@
 const { User } = require('../../models/user');
 const { UserInputError, AuthenticationError, ApolloError } = require('apollo-server-express');
+const authorize = require('../../utils/isAuth');
+const { userOwnership } = require('../../utils/tools');
 
 module.exports = {
   Mutation:{
@@ -45,5 +47,12 @@ module.exports = {
           throw err
       }
     },
+    updateUserProfile: async(parent,args,context,info)=>{
+      try {
+        const req = authorize(context.req);
+      } catch (err) {
+        throw err;
+      }
+    }
   }
 }

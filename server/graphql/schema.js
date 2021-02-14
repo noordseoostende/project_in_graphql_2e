@@ -3,9 +3,11 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
 type Query{
   user(id:ID!):User!
+  isAuth:User!
 }
 
 type Mutation {
+  updateUserProfile(name:String,lastname:String,id:ID!):User!
   authUser(fields:AuthInput!):User!
   signUp(fields:AuthInput!):User!
 }

@@ -2,30 +2,37 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const { AuthenticationError } = require('apollo-server-express');
 
-const authorize = (req) => {
+const throwAuthError = () => {
+  throw new AuthenticationError('u bent niet geautoriseerd');
+}
+
+const authorize = (req, verify = false) => {
   const authorizationHeader = req.headers.authorization || '';
   if(!authorizationHeader) {
     req.isAuth = false;
-    throw new AuthenticationError('u bent niet geautoriseerd 1');
+    return !verify ? throwAuthError() : req;
+    
   }
   const token = authorizationHeader.replace('Bearer ','');
   if(!token || token === ''){
     req.isAuth = false;
-    throw new AuthenticationError('u bent niet geautoriseerd 2');
+    return !verify ? throwAuthError() : req;
   }
   let decodedJWT;
   try {
     decodedJWT = jwt.verify(token,process.env.SECRET);
     if(!decodedJWT){
       req.isAuth = false;
-      throw new AuthenticationError('u bent niet geautoriseerd 3');
+      return !verify ? throwAuthError() : req;
     }
     req.isAuth = true;
     req._id = decodedJWT._id;
     req.email = decodedJWT.email;
+    req.token = token;
+    return req;
   } catch (err) {
     req.isAuth = false;
-    throw new AuthenticationError('u bent niet geautoriseerd 4');
+    return !verify ? throwAuthError() : req;
     
   }
 
