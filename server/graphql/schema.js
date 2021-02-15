@@ -12,6 +12,7 @@ type Mutation {
   authUser(fields:AuthInput!):User!
   signUp(fields:AuthInput!):User!
   createPost(fields:PostInput!):Post!
+  createCategory(name:String!):Category!
 }
 
 type Post {
@@ -32,6 +33,13 @@ type User {
   name:String
   lastname:String
   token:String
+}
+
+type Category {
+  _id: ID!
+  name: String!
+  author: User!
+  posts: [Post]
 }
 
 input AuthInput {
