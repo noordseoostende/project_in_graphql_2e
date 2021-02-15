@@ -103,7 +103,8 @@ module.exports = {
           excerpt: fields.excerpt,
           content: fields.content,
           author:req._id,
-          status: fields.status
+          status: fields.status,
+          category: fields.category
 
         });
         const result = await post.save();

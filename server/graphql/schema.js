@@ -22,8 +22,9 @@ type Post {
   content: String!
   created_at: String
   updated_at: String
-  author: User!
   status: PostStatus
+  author: User!
+  category:Category!
 }
 
 type User {
@@ -33,6 +34,8 @@ type User {
   name:String
   lastname:String
   token:String
+  posts:[Post!]!
+  categories:[Category!]!
 }
 
 type Category {
@@ -52,6 +55,7 @@ input PostInput {
   excerpt: String
   content: String
   status: PostStatus
+  category: ID
 }
 
 enum PostStatus {
