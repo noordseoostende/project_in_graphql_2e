@@ -164,6 +164,34 @@ module.exports = {
       } catch (err) {
         throw err;
       }
+    },
+    updateCategory: async(parent,{catId,name},context,info)=>{
+      try {
+        const req = authorize(context.req);
+        const category = await Category.findByIdAndUpdate(
+          { _id: catId },
+          {
+            "$set":{
+              name
+            }
+          },
+          { new: true}
+        );
+        return {...category._doc}
+      } catch (err) {
+        throw err;
+      }
+    },
+    deleteCategory: async(parent,{catId},context,info)=>{
+      try {
+        const req = authorize(context.req);
+        const category = await Category.findByIdAndRemove(catId);
+        if(!category) throw new UserInputError('Hm.Jouw categorie nergens te vinden of je heb het al verwijderd')
+
+        return category;
+      } catch (err) {
+        throw err;
+      }
     }
   }
 }

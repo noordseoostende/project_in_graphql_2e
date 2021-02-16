@@ -18,6 +18,8 @@ type Mutation {
   updatePost(fields:PostInput!,postId:ID!):Post!
   deletePost(postId:ID!):Post
   createCategory(name:String!):Category!
+  updateCategory(catId:ID!,name:String!):Category
+  deleteCategory(catId:String!):Category
 }
 
 type Post {
