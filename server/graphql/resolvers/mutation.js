@@ -127,6 +127,43 @@ module.exports = {
       } catch (err) {
         throw err
       }
+    },
+    updatePost: async(parent,{fields,postId},context,info)=>{
+      try {
+        const req = authorize(context.req);
+        const post = await Post.findOne({'_id': postId});
+
+        if(!userOwnership(req,post.author))
+        throw new AuthenticationError('Je was niet ingelogd');
+
+        // if(post.title != fields.title){
+        //   post.title = fields.title
+        // } else {
+
+        // }
+        for(key in fields){
+          if(post[key] != fields[key]){
+            post[key] = fields[key];
+          }
+        }
+
+        const result = await post.save();
+        return {...result._doc}
+      } catch (err) {
+        throw err;
+      }
+    },
+    deletePost: async(parent,{postId},context,info)=>{
+      try {
+        const req = authorize(context.req);
+        const post = await Post.findByIdAndRemove(postId);
+        if(!post) throw new UserInputError('Hm.Jouw boodschaap nergens te vinden of je heb het al verwijderd')
+        // if(!userOwnership(req,post.author))
+        // throw new AuthenticationError('Je was niet ingelogd');
+        return post;
+      } catch (err) {
+        throw err;
+      }
     }
   }
 }

@@ -15,6 +15,8 @@ type Mutation {
   authUser(fields:AuthInput!):User!
   signUp(fields:AuthInput!):User!
   createPost(fields:PostInput!):Post!
+  updatePost(fields:PostInput!,postId:ID!):Post!
+  deletePost(postId:ID!):Post
   createCategory(name:String!):Category!
 }
 
