@@ -43,10 +43,10 @@ module.exports = {
         }
         return {...getToken._doc}
       } catch (err) {
-          if(err.code === 11000){
-            throw new AuthenticationError('Sorry, dat was gedupliceerde e-mail, probeer het opnieuw');
-          }
-          throw err
+          // if(err.code === 11000){
+          //   throw new AuthenticationError('Sorry, dat was gedupliceerde e-mail, probeer het opnieuw');
+          // }
+          throw new ApolloError('Iets ging mis',null,err)
       }
     },
     updateUserProfile: async(parent,args,context,info)=>{
