@@ -20,7 +20,7 @@ const server = new ApolloServer({
       Category
     },
     context:({ req})=>{
-      req.headers.authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDI5MzI4NGIxY2E5MDFkZDc3YmFjYWYiLCJlbWFpbCI6ImhpbW1pbnNAZ21haWwuY29tIiwiaWF0IjoxNjEzMzg2NDEyLCJleHAiOjE2MTM5OTEyMTJ9.FsirJ4eFAr8Wz7YH7CgYHXwrmmKK19EKQw8Z-7lYLDc';
+      // req.headers.authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDI5MzI4NGIxY2E5MDFkZDc3YmFjYWYiLCJlbWFpbCI6ImhpbW1pbnNAZ21haWwuY29tIiwiaWF0IjoxNjEzMzg2NDEyLCJleHAiOjE2MTM5OTEyMTJ9.FsirJ4eFAr8Wz7YH7CgYHXwrmmKK19EKQw8Z-7lYLDc';
 
       //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDI5MzI4NGIxY2E5MDFkZDc3YmFjYWYiLCJlbWFpbCI6Imhpa2tpbnNAZ21haWwuY29tIiwiaWF0IjoxNjEzMzEyNjQ0LCJleHAiOjE2MTM5MTc0NDR9.2DjwDqIXkzZgvQMDo8xNBUgfJpJDIvw8DUyazSf1KlA
       return {req}
