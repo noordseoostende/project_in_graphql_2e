@@ -1,5 +1,6 @@
 const { User } = require('../../models/user');
 const { Post } = require('../../models/post');
+// const post = require('../../models/post');
 
 module.exports = {
   Category:{
